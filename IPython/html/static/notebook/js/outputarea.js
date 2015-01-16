@@ -141,6 +141,16 @@ define([
             this.prompt_overlay.show();
             this.collapsed = false;
             this.scroll_if_long();
+
+            // HACK: force Chrome/Safari to re-compute height
+            // one of many hacks tried, only one confirmed working
+            var oa = this.element.find('.output_area > :last-child');
+            setTimeout(function() {
+                var tmp = $('<div />').appendTo(oa);
+                setTimeout(function() {
+                    tmp.remove();
+                }, 1000);
+            }, 0);
         }
     };
 
